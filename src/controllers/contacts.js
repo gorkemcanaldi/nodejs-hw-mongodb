@@ -1,20 +1,45 @@
 import createHttpError from 'http-errors';
 import Contact from '../db/Contact.js';
 import {
-  getAllContacts,
   getContactById,
   createContact,
   updateContactById,
-  deleteContactById,
 } from '../services/contacts.js';
 
 export const getContacts = async (req, res, next) => {
   try {
-    const contacts = await getAllContacts();
+    const page = parseInt(req.query.page) || 1;
+    const perPage = parseInt(req.query.perPage) || 10;
+
+    const sortBy = req.query.sortBy || 'name';
+    const sortOrder = req.query.sortOrder || 'asc';
+
+    const filter = {};
+
+    if (req.query.isFavourite !== undefined) {
+      filter.isFavourite = req.query.isFavourite === 'true';
+    }
+
+    const totalItems = await Contact.countDocuments(filter);
+    const totalPages = Math.ceil(totalItems / perPage);
+
+    const contacts = await Contact.find(filter)
+      .sort({ [sortBy]: sortOrder === 'asc' ? 1 : -1 })
+      .skip((page - 1) * perPage)
+      .limit(perPage);
+
     res.status(200).json({
       status: 200,
       message: 'Successfully found contacts',
-      data: contacts,
+      data: {
+        data: contacts,
+        page,
+        perPage,
+        totalItems,
+        totalPages,
+        hasPreviousPage: page > 1,
+        hasNextPage: page < totalPages,
+      },
     });
   } catch (error) {
     next(error);
