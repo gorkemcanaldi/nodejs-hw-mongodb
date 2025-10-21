@@ -24,6 +24,13 @@ const setupServer = () => {
   );
   app.use('/auth', auth);
 
+  app.get('/', (req, res) => {
+    res.json({
+      status: 200,
+      message: 'API is running',
+    });
+  });
+
   app.use('/contacts', router);
 
   app.use(notFoundHandler);
