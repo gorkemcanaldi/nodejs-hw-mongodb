@@ -4,12 +4,15 @@ import pinohttp from 'pino-http';
 import router from './routers/contacts.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import auth from './routers/auth.js';
+import cookieParser from 'cookie-parser';
 
 const setupServer = () => {
   const app = express();
 
   app.use(cors());
   app.use(express.json());
+  app.use(cookieParser());
 
   app.use(
     pinohttp({
@@ -19,6 +22,7 @@ const setupServer = () => {
       },
     })
   );
+  app.use('/auth', auth);
 
   app.use('/contacts', router);
 
