@@ -1,7 +1,5 @@
-// services/contacts.js
 import Contact from '../db/models/Contact.js';
 
-// Tüm kontakları getir, filtrele, sayfalama ve sıralama uygula
 export const getAllContacts = async (userId, query) => {
   const page = parseInt(query.page) || 1;
   const perPage = parseInt(query.perPage) || 10;
