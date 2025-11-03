@@ -33,7 +33,8 @@ router.delete('/:contactId', isValidId, ctrlWrapper(deleteContact));
 router.patch(
   '/:contactId',
   isValidId,
-  validateBody(updateContactSchema),
+  upload.single('photo'),
   ctrlWrapper(updateContact)
 );
+
 export default router;

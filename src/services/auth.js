@@ -116,7 +116,7 @@ export const requestResetMail = async (email) => {
 
   const htmlMailIcerik = template({
     name: user.name,
-    url: `${process.env.APP_DOMAIN}/reset-password?token=${resetToken}`,
+    url: `${process.env.APP_DOMAIN}/reset-pwd?token=${resetToken}`,
   });
 
   // mail gönder

@@ -55,6 +55,11 @@ export const createNewContact = async (req, res) => {
 export const updateContact = async (req, res) => {
   const updatedData = { ...req.body };
 
+  // form-data'dan gelen boolean dönüşümü
+  if (typeof updatedData.isFavourite === 'string') {
+    updatedData.isFavourite = updatedData.isFavourite.trim() === 'true';
+  }
+
   if (req.file) {
     const photoUrl = await saveFileCloud(req.file);
     updatedData.photo = photoUrl;
