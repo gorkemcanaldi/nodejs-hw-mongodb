@@ -1,4 +1,3 @@
-import nodemailer from 'nodemailer';
 import sendinblueTransport from 'nodemailer-sendinblue-transport';
 import dotenv from 'dotenv';
 dotenv.config();
