@@ -1,18 +1,22 @@
 import nodemailer from 'nodemailer';
+import sendinblueTransport from 'nodemailer-sendinblue-transport';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const sendMail = async (options) => {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
+  const transporter = nodemailer.createTransport(
+    sendinblueTransport({
+      apiKey: process.env.BREVO_API_KEY,
+    })
+  );
+
   try {
-    await transporter.verify();
+    // Mail gönder
+    const info = await transporter.sendMail(options);
+    console.log('Mail sent successfully:', info);
+    return info;
   } catch (error) {
-    console.log('SMTP connection error:', error);
+    console.error('Mail sending error:', error);
+    throw new Error('Failed to send the email, please try again later.');
   }
-  return await transporter.sendMail(options);
 };
