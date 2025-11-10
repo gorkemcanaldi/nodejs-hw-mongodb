@@ -1,0 +1,42 @@
+post:
+  tags:
+    - Contacts
+  summary: Create a new contact
+  operationId: createContact
+  description: Create a new contact belonging to the authenticated user.
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            phoneNumber:
+              type: number
+            email:
+              type: string
+            isFavourite:
+              type: boolean
+            contactType:
+              type: string
+              enum: [work, home, personal]
+            photo:
+              type: string
+          required:
+            - name
+            - phoneNumber
+  responses:
+    '201':
+      description: Contact successfully created
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/contact.yaml#/Contact
+    '400':
+      description: Invalid input
+    '401':
+      description: Unauthorized

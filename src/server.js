@@ -6,6 +6,9 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import auth from './routers/auth.js';
 import cookieParser from 'cookie-parser';
+import swaggerUi from 'swagger-ui-express';
+import fs from 'node:fs';
+import path from 'path';
 
 const setupServer = () => {
   const app = express();
@@ -32,6 +35,9 @@ const setupServer = () => {
   });
 
   app.use('/contacts', router);
+  const swaggerPath = path.join(process.cwd(), 'docs/swagger.json');
+  const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, 'utf-8'));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   app.use(notFoundHandler);
   app.use(errorHandler);

@@ -1,0 +1,25 @@
+User:
+  type: object
+  properties:
+    id:
+      type: string
+      example: 672fe2344c11223344556677
+    name:
+      type: string
+      example: Jane Doe
+    email:
+      type: string
+      example: jane@example.com
+    password:
+      type: string
+      example: mysecretpassword
+    createdAt:
+      type: string
+      format: date-time
+    updatedAt:
+      type: string
+      format: date-time
+  required:
+    - name
+    - email
+    - password

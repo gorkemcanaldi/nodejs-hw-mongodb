@@ -1,0 +1,41 @@
+patch:
+  tags:
+    - Contacts
+  summary: Update a contact
+  operationId: updateContact
+  description: Update fields of an existing contact.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: contactId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            phoneNumber:
+              type: number
+            email:
+              type: string
+            isFavourite:
+              type: boolean
+            contactType:
+              type: string
+              enum: [work, home, personal]
+            photo:
+              type: string
+  responses:
+    '200':
+      description: Contact updated successfully
+    '400':
+      description: Invalid input
+    '404':
+      description: Contact not found
