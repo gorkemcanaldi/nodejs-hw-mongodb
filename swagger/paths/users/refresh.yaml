@@ -1,0 +1,17 @@
+tags:
+  - Users
+summary: Refresh user session
+operationId: refreshUser
+description: Refresh access token using refresh token.
+responses:
+  '200':
+    description: New access token issued
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            accessToken:
+              type: string
+  '401':
+    description: Unauthorized

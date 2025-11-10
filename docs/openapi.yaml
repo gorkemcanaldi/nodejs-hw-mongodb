@@ -28,7 +28,18 @@ paths:
       $ref: ../swagger/paths/contacts/{contactId}/patch.yaml
     delete:
       $ref: ../swagger/paths/contacts/{contactId}/delete.yaml
-
+  /auth/register:
+    post:
+      $ref: ../swagger/paths/users/register.yaml
+  /auth/login:
+    post:
+      $ref: ../swagger/paths/users/login.yaml
+  /auth/refresh:
+    post:
+      $ref: ../swagger/paths/users/refresh.yaml
+  /auth/logout:
+    post:
+      $ref: ../swagger/paths/users/logout.yaml
 components:
   securitySchemes:
     bearerAuth:
@@ -39,6 +50,5 @@ components:
       $ref: ../swagger/components/schemas/contact.yaml#/Contact
     User:
       $ref: ../swagger/components/schemas/user.yaml#/User
-
 security:
   - bearerAuth: []

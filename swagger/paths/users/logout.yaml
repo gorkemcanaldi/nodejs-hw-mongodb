@@ -1,0 +1,8 @@
+tags:
+  - Users
+summary: Logout user
+operationId: logoutUser
+description: Logout a user and clear session cookies.
+responses:
+  '204':
+    description: User logged out successfully

@@ -8,7 +8,7 @@ Contact:
       type: string
       example: John Doe
     phoneNumber:
-      type: number
+      type: string
       example: 905551234567
     email:
       type: string
@@ -18,7 +18,10 @@ Contact:
       example: true
     contactType:
       type: string
-      enum: [work, home, personal]
+      enum:
+        - work
+        - home
+        - personal
       example: personal
     photo:
       type: string

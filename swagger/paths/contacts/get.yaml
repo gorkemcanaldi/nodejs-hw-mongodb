@@ -1,41 +1,29 @@
-get:
-  tags:
-    - Contacts
-  summary: Get all contacts
-  operationId: getAllContacts
-  description: Retrieve a list of all contacts belonging to the authenticated user.
-  security:
-    - bearerAuth: []
-  parameters:
-    - name: page
-      in: query
-      schema:
-        type: integer
-      description: Page number
-    - name: limit
-      in: query
-      schema:
-        type: integer
-      description: Number of results per page
-    - name: isFavourite
-      in: query
-      schema:
-        type: boolean
-      description: Filter by favourite status
-    - name: contactType
-      in: query
-      schema:
-        type: string
-        enum: [work, home, personal]
-      description: Filter by contact type
-  responses:
-    '200':
-      description: Successful response
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: ../../components/schemas/contact.yaml#/Contact
-    '401':
-      description: Unauthorized
+tags:
+  - Contacts
+summary: Get all contacts
+operationId: getAllContacts
+description: Retrieve a list of all contacts for the authenticated user.
+security:
+  - bearerAuth: []
+parameters:
+  - name: page
+    in: query
+    schema:
+      type: integer
+    description: Page number
+  - name: limit
+    in: query
+    schema:
+      type: integer
+    description: Number of results per page
+responses:
+  200:
+    description: Successfully retrieved contacts
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: ../../components/schemas/contact.yaml#/Contact
+  401:
+    description: Unauthorized

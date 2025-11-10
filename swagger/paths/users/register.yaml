@@ -1,0 +1,31 @@
+tags:
+  - Users
+summary: Register a new user
+operationId: registerUser
+description: Create a new user account.
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+          email:
+            type: string
+          password:
+            type: string
+        required:
+          - name
+          - email
+          - password
+responses:
+  '201':
+    description: User successfully registered
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/user.yaml#/User
+  '400':
+    description: Invalid input
